@@ -1,17 +1,11 @@
-
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
-from django.contrib import auth
+from django.utils import timezone
 
 
-# Create your models here.
-# PermissionMixin добавляет функциональность связанную
-# с управлением правами доступа и разрешениями пользователей
-# auth.models.User передает основные данные имя, фамилия, почта
-class User(auth.models.User, auth.models.PermissionsMixin):
+class User(AbstractBaseUser):
+    name = models.CharField(max_length=255)
+    email = models.CharField(max_length=140, default='SOME STRING')
 
     def __str__(self):
-        return "@{}".format(self.username)
-
-
-
-
+        return self.name
